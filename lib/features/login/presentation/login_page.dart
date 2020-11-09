@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:momobill/colors.dart';
+import 'package:momobill/core/presentation/util/navigator.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -38,7 +39,10 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 80.0),
             Column(
               children: <Widget>[
-                Icon(Icons.motorcycle_outlined, color: kBrown900,),
+                Icon(
+                  Icons.motorcycle_outlined,
+                  color: kBrown900,
+                ),
                 SizedBox(height: 16.0),
                 Text(
                   'MoMoBill',
@@ -58,9 +62,7 @@ class _LoginPageState extends State<LoginPage> {
               focusNode: _usernameFocusNode,
               controller: _usernameController,
             ),
-            SizedBox(
-              height: 12,
-            ),
+            SizedBox(height: 12),
             TextField(
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -79,8 +81,9 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     _usernameController.clear();
                     _passwordController.clear();
+                    Navigator.pushNamed(context, ROUTE_TRIVIA);
                   },
-                  child: Text('REGISTER'),
+                  child: Text('To Trivia Page'),
                   shape: BeveledRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(7.0)),
                   ),

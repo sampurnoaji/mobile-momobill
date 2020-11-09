@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:momobill/core/presentation/util/navigator.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -35,6 +36,14 @@ class HomePage extends StatelessWidget {
         ],
       ),
       resizeToAvoidBottomInset: false,
+      body: Center(
+        child: RaisedButton(
+          child: Text('To Login Page'),
+          onPressed: () {
+            Navigator.pushNamed(context, ROUTE_LOGIN);
+          },
+        ),
+      ),
     );
   }
 }

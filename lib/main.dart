@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:momobill/core/presentation/util/navigator.dart';
 import 'package:momobill/features/login/presentation/login_page.dart';
+import 'package:momobill/features/trivia/presentation/pages/number_trivia_page.dart';
 
 import 'colors.dart';
 import 'features/home/home_page.dart';
+import 'injection_container.dart' as di;
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await di.init();
   runApp(MyApp());
 }
 
@@ -15,21 +20,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '',
       home: HomePage(),
-      initialRoute: '/login',
-      onGenerateRoute: _getRoute,
+      routes: {
+        ROUTE_LOGIN: (context) => LoginPage(),
+        ROUTE_TRIVIA: (context) => NumberTriviaPage()
+      },
       theme: _kTheme,
-    );
-  }
-
-  Route<dynamic> _getRoute(RouteSettings settings) {
-    if (settings.name != '/login') {
-      return null;
-    }
-
-    return MaterialPageRoute<void>(
-      settings: settings,
-      builder: (BuildContext context) => LoginPage(),
-      fullscreenDialog: true,
     );
   }
 }
