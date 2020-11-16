@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:momobill/core/presentation/util/navigator.dart';
-import 'package:momobill/features/login/presentation/login_page.dart';
+import 'package:momobill/features/authentication/bloc/authentication_bloc.dart';
+import 'package:momobill/features/login/presentation/pages/login_page.dart';
 import 'package:momobill/features/trivia/presentation/pages/number_trivia_page.dart';
 
 import 'colors.dart';
 import 'features/home/home_page.dart';
 import 'injection_container.dart' as di;
+import 'injection_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +22,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '',
-      home: HomePage(),
       routes: {
         ROUTE_LOGIN: (context) => LoginPage(),
+        ROUTE_HOME: (_) => HomePage(),
         ROUTE_TRIVIA: (context) => NumberTriviaPage()
       },
       theme: _kTheme,
+      home: BlocProvider(
+        create: (_) => sl<AuthenticationBloc>(),
+        child: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+          builder: (context, state) {
+            if (state is AuthenticationAuthenticated) {
+              return HomePage();
+            } else {
+              return LoginPage();
+            }
+          },
+        ),
+      ),
     );
   }
 }
