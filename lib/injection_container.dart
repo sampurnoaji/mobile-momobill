@@ -22,7 +22,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => DataConnectionChecker());
 
   // Features
-  NumberTriviaInjection.setupServiceLocator(sl);
   AuthenticationInjection.setupServiceLocator(sl);
   LoginInjection.setupServiceLocator(sl);
+  NumberTriviaInjection.setupServiceLocator(sl);
 }
