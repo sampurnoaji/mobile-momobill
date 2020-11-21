@@ -6,6 +6,7 @@ import 'package:momobill/core/presentation/util/input_converter.dart';
 import 'package:momobill/features/authentication/authentication_injection.dart';
 import 'package:momobill/features/login/login_injection.dart';
 import 'package:momobill/features/trivia/number_trivia_injection.dart';
+import 'package:momobill/features/vehicle/add/add_vehicle_injection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
@@ -25,4 +26,5 @@ Future<void> init() async {
   AuthenticationInjection.setupServiceLocator(sl);
   LoginInjection.setupServiceLocator(sl);
   NumberTriviaInjection.setupServiceLocator(sl);
+  AddVehicleInjection.setupServiceLocator(sl);
 }

@@ -45,27 +45,24 @@ class HomePage extends StatelessWidget {
   }
 
   BlocProvider<AuthenticationBloc> buildBody(BuildContext context) {
-    final bloc = sl<AuthenticationBloc>();
-
     return BlocProvider(
-      create: (_) => bloc,
+      create: (_) => sl<AuthenticationBloc>(),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             RaisedButton(
-              child: Text('To Login Page'),
+              child: Text('Logout'),
               onPressed: () {
-                // Navigator.pushNamed(context, ROUTE_LOGIN);
                 Navigator.of(context).pushNamedAndRemoveUntil(ROUTE_LOGIN, (Route<dynamic> route) => false);
               },
             ),
             SizedBox(height: 16),
             RaisedButton(
+              child: Text('Add Vehicle'),
               onPressed: () {
-                bloc.add(LoggedOut());
+                Navigator.of(context).pushNamed(ROUTE_ADD_VEHICLE);
               },
-              child: Text('Logout'),
             )
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:momobill/core/presentation/util/navigator.dart';
 import 'package:momobill/features/authentication/bloc/authentication_bloc.dart';
 import 'package:momobill/features/login/presentation/pages/login_page.dart';
 import 'package:momobill/features/trivia/presentation/pages/number_trivia_page.dart';
+import 'package:momobill/features/vehicle/add/presentation/pages/add_vehicle_page.dart';
 
 import 'colors.dart';
 import 'features/home/home_page.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       routes: {
         ROUTE_LOGIN: (context) => LoginPage(),
         ROUTE_HOME: (_) => HomePage(),
-        ROUTE_TRIVIA: (context) => NumberTriviaPage()
+        ROUTE_TRIVIA: (context) => NumberTriviaPage(),
+        ROUTE_ADD_VEHICLE: (_) => AddVehiclePage(),
       },
       theme: _kTheme,
       home: BlocProvider(
@@ -70,15 +72,15 @@ ThemeData _buildTheme() {
     primaryIconTheme: base.iconTheme.copyWith(
         color: kBrown900
     ),
-    inputDecorationTheme: InputDecorationTheme(
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          width: 2.0,
-          color: kBrown900,
-        ),
-      ),
-      border: OutlineInputBorder(),
-    ),
+    // inputDecorationTheme: InputDecorationTheme(
+    //   focusedBorder: OutlineInputBorder(
+    //     borderSide: BorderSide(
+    //       width: 2.0,
+    //       color: kBrown900,
+    //     ),
+    //   ),
+    //   border: OutlineInputBorder(),
+    // ),
   );
 }
 

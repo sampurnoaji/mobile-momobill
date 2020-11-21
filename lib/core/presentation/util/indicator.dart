@@ -25,3 +25,21 @@ void showLoadingIndicator(BuildContext context) {
 void hideOpenDialog(BuildContext context) {
   Navigator.of(context).pop();
 }
+
+void successSnackBar(BuildContext context, String message) {
+  Scaffold.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: Colors.green,
+      content: Text(message),
+    ),
+  );
+}
+
+void errorSnackBar(BuildContext context, String message) {
+  Scaffold.of(context).showSnackBar(
+    SnackBar(
+      backgroundColor: Colors.red,
+      content: Text(message),
+    ),
+  );
+}

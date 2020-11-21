@@ -14,19 +14,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  LoginBloc _bloc;
-
-  @override
-  void didChangeDependencies() {
-    _bloc = sl<LoginBloc>();
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // key: _scaffoldState,
-      body: BlocProvider(create: (_) => _bloc, child: LoginForm()),
+      body: BlocProvider(create: (_) => sl<LoginBloc>(), child: LoginForm()),
     );
   }
 }
@@ -38,7 +30,8 @@ class LoginForm extends StatelessWidget {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is LoginLoading) {
-          showLoadingIndicator(context);
+          // showLoadingIndicator(context);
+          Navigator.pushReplacementNamed(context, ROUTE_HOME);
         } else if (state is LoginFailure) {
           hideOpenDialog(context);
           Scaffold.of(context)
