@@ -7,6 +7,12 @@ abstract class AddVehicleEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class GetVehicleTypes extends AddVehicleEvent {}
+
+class GetVehicleBrands extends AddVehicleEvent {}
+
+class GetVehicleModels extends AddVehicleEvent {}
+
 class VehicleTypeChanged extends AddVehicleEvent {
   const VehicleTypeChanged(this.type);
 

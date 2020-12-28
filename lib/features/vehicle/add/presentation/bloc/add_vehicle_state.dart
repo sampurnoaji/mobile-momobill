@@ -5,6 +5,17 @@ abstract class AddVehicleState extends Equatable {
   List<Object> get props => [];
 }
 
+class GetVehicleTypesSuccess extends AddVehicleState {
+  final List<Result> vehicleTypes;
+
+  GetVehicleTypesSuccess({this.vehicleTypes});
+
+  @override
+  List<Object> get props => [vehicleTypes];
+}
+
+class GetVehicleTypesFailure extends AddVehicleState {}
+
 class AddVehicleInitial extends AddVehicleState {}
 
 class AddVehicleLoading extends AddVehicleState {}

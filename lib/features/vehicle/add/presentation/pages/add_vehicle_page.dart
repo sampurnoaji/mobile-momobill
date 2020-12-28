@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:momobill/core/presentation/util/alert.dart';
+import 'package:momobill/features/vehicle/add/domain/models/result.dart';
 import 'package:momobill/features/vehicle/add/presentation/bloc/add_vehicle_bloc.dart';
 
 import '../../../../../injection_container.dart';
@@ -22,7 +23,13 @@ class FormInput extends StatefulWidget {
 class _FormInputState extends State<FormInput> {
   String _selectedType, _selectedBrand, _selectedManufacture;
   List _myFriends = ['Yonji', 'Sanji', 'Niji'];
+  List<Result> _vehicleTypes = List();
 
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<AddVehicleBloc>(context).add(GetVehicleTypes());
+  }
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
@@ -37,6 +44,14 @@ class _FormInputState extends State<FormInput> {
             } else if (state is AddVehicleFailure) {
               errorSnackBar(context, state.message);
             }
+
+            if (state is GetVehicleTypesSuccess) {
+              setState(() {
+                _vehicleTypes = state.vehicleTypes;
+              });
+            } else if (state is GetVehicleTypesFailure) {
+              errorSnackBar(context, 'Gagal memuat data');
+            }
           },
           child: SingleChildScrollView(
             child: Padding(
@@ -46,13 +61,16 @@ class _FormInputState extends State<FormInput> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   DropdownButton(
+                    onTap: () {
+                      errorSnackBar(context, 'message');
+                    },
                     isExpanded: true,
-                    hint: Text("Pilih Tipe"),
+                    hint: Text("Pilih jenis"),
                     value: _selectedType,
-                    items: _myFriends.map((value) {
+                    items: _vehicleTypes.map((value) {
                       return DropdownMenuItem(
-                        child: Text(value),
-                        value: value,
+                        child: value.description != null ? Text(value.description) : Text("null"),
+                        value: value.description,
                       );
                     }).toList(),
                     onChanged: (value) {
@@ -64,7 +82,7 @@ class _FormInputState extends State<FormInput> {
                   SizedBox(height: 16),
                   DropdownButton(
                     isExpanded: true,
-                    hint: Text("Pilih Brand"),
+                    hint: Text("Pilih merk"),
                     value: _selectedBrand,
                     items: _myFriends.map((value) {
                       return DropdownMenuItem(
@@ -81,7 +99,7 @@ class _FormInputState extends State<FormInput> {
                   SizedBox(height: 16),
                   DropdownButton(
                     isExpanded: true,
-                    hint: Text("Pilih Manufaktur"),
+                    hint: Text("Pilih model"),
                     value: _selectedManufacture,
                     items: _myFriends.map((value) {
                       return DropdownMenuItem(
