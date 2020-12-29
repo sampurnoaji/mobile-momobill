@@ -16,7 +16,7 @@ class AddVehicleInjection {
 
     // Data sources
     sl.registerLazySingleton<VehiclePropertiesRemoteDataSource>(
-        () => VehiclePropertiesRemoteDataSourceImpl(client: sl()));
+        () => VehiclePropertiesRemoteDataSourceImpl(dio: sl()));
 
     // Data sources
     sl.registerLazySingleton<VehiclePropertiesRepository>(() =>

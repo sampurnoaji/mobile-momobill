@@ -40,6 +40,8 @@ dependencies:
   # Remote API
   data_connection_checker: ^0.3.4
   http: ^0.12.2
+  rxdart: ^0.25.0
+  dio: ^3.0.10
   # Local cache
   shared_preferences: ^0.5.3+4
 
