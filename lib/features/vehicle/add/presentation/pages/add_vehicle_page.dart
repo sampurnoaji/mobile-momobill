@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:momobill/core/presentation/util/alert.dart';
-import 'package:momobill/features/vehicle/add/domain/models/result.dart';
+import 'package:momobill/features/vehicle/add/domain/models/vehicle_type.dart';
 import 'package:momobill/features/vehicle/add/presentation/bloc/add_vehicle_bloc.dart';
 
 import '../../../../../injection_container.dart';
@@ -23,7 +23,7 @@ class FormInput extends StatefulWidget {
 class _FormInputState extends State<FormInput> {
   String _selectedType, _selectedBrand, _selectedManufacture;
   List _myFriends = ['Yonji', 'Sanji', 'Niji'];
-  List<Result> _vehicleTypes = List();
+  List<VehicleType> _vehicleTypes = List();
 
   @override
   void initState() {
@@ -61,16 +61,13 @@ class _FormInputState extends State<FormInput> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   DropdownButton(
-                    onTap: () {
-                      errorSnackBar(context, 'message');
-                    },
                     isExpanded: true,
                     hint: Text("Pilih jenis"),
                     value: _selectedType,
                     items: _vehicleTypes.map((value) {
                       return DropdownMenuItem(
-                        child: value.description != null ? Text(value.description) : Text("null"),
-                        value: value.description,
+                        child: value.name != null ? Text(value.name) : Text("null"),
+                        value: value.name,
                       );
                     }).toList(),
                     onChanged: (value) {

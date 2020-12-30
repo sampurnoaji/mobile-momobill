@@ -3,8 +3,8 @@ import 'package:momobill/core/error/exception.dart';
 import 'package:momobill/core/error/failures.dart';
 import 'package:momobill/core/network/network_info.dart';
 import 'package:momobill/features/vehicle/add/data/datasources/vehicle_properties_remote_data_source.dart';
-import 'package:momobill/features/vehicle/add/data/models/result_model.dart';
-import 'package:momobill/features/vehicle/add/domain/models/result.dart';
+import 'package:momobill/features/vehicle/add/data/models/vehicle_type_response.dart';
+import 'package:momobill/features/vehicle/add/domain/models/vehicle_type.dart';
 import 'package:momobill/features/vehicle/add/domain/repositories/vehicle_properties_repository.dart';
 
 class VehiclePropertiesRepositoryImpl implements VehiclePropertiesRepository {
@@ -14,7 +14,7 @@ class VehiclePropertiesRepositoryImpl implements VehiclePropertiesRepository {
   VehiclePropertiesRepositoryImpl({this.remoteDataSource, this.networkInfo});
 
   @override
-  Future<Either<Failure, List<Result>>> getVehicleTypes() async {
+  Future<Either<Failure, List<VehicleType>>> getVehicleTypes() async {
     if (await networkInfo.isConnected) {
       try {
         final response = await remoteDataSource.getVehicleTypes();

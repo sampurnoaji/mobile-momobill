@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class VehicleType extends Equatable {
-  final int id;
+  final String id;
   final String name;
 
   VehicleType({this.id, this.name});

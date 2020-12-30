@@ -6,7 +6,7 @@ abstract class AddVehicleState extends Equatable {
 }
 
 class GetVehicleTypesSuccess extends AddVehicleState {
-  final List<Result> vehicleTypes;
+  final List<VehicleType> vehicleTypes;
 
   GetVehicleTypesSuccess({this.vehicleTypes});
 

@@ -2,9 +2,9 @@ import 'package:formz/formz.dart';
 
 enum VehicleManufactureValidationError { empty }
 
-class VehicleManufacture extends FormzInput<String, VehicleManufactureValidationError> {
-  const VehicleManufacture.pure() : super.pure('');
-  const VehicleManufacture.dirty([String value = '']) : super.dirty(value);
+class VehicleManufactureValidation extends FormzInput<String, VehicleManufactureValidationError> {
+  const VehicleManufactureValidation.pure() : super.pure('');
+  const VehicleManufactureValidation.dirty([String value = '']) : super.dirty(value);
 
   @override
   VehicleManufactureValidationError validator(String value) {

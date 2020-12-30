@@ -1,19 +1,16 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:momobill/core/error/failures.dart';
 import 'package:momobill/core/usecase/usecase.dart';
-import 'package:momobill/features/vehicle/add/domain/models/result.dart';
+import 'package:momobill/features/vehicle/add/domain/models/vehicle_type.dart';
 import 'package:momobill/features/vehicle/add/domain/usecases/get_vehicle_types_usecase.dart';
-import 'package:momobill/features/vehicle/add/presentation/models/vehicle_brand.dart';
-import 'package:momobill/features/vehicle/add/presentation/models/vehicle_manufacture.dart';
-import 'package:momobill/features/vehicle/add/presentation/models/vehicle_type.dart';
+import 'package:momobill/features/vehicle/add/presentation/models/vehicle_brand_validation.dart';
+import 'package:momobill/features/vehicle/add/presentation/models/vehicle_manufacture_validation.dart';
+import 'package:momobill/features/vehicle/add/presentation/models/vehicle_type_validation.dart';
 
 part 'add_vehicle_event.dart';
-
 part 'add_vehicle_state.dart';
 
 class AddVehicleBloc extends Bloc<AddVehicleEvent, AddVehicleState> {
@@ -33,10 +30,10 @@ class AddVehicleBloc extends Bloc<AddVehicleEvent, AddVehicleState> {
   }
 
   _mapAddVehicleToState(AddVehicle event) {
-    final vehicleType = VehicleType.dirty(event.type ?? '');
-    final vehicleBrand = VehicleBrand.dirty(event.brand ?? '');
+    final vehicleType = VehicleTypeValidation.dirty(event.type ?? '');
+    final vehicleBrand = VehicleBrandValidation.dirty(event.brand ?? '');
     final vehicleManufacture =
-        VehicleManufacture.dirty(event.manufacture ?? '');
+        VehicleManufactureValidation.dirty(event.manufacture ?? '');
 
     if (vehicleType.invalid)
       return AddVehicleFailure(message: 'Lengkapi isian tipe kedaraan');

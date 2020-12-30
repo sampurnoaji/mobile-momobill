@@ -1,10 +1,10 @@
 
 import 'package:dio/dio.dart';
 import 'package:momobill/core/error/exception.dart';
-import 'package:momobill/features/vehicle/add/data/models/result_model.dart';
+import 'package:momobill/features/vehicle/add/data/models/vehicle_type_response.dart';
 
 abstract class VehiclePropertiesRemoteDataSource {
-  Future<ResultsModel> getVehicleTypes();
+  Future<VehicleTypeListResponse> getVehicleTypes();
 }
 
 class VehiclePropertiesRemoteDataSourceImpl implements VehiclePropertiesRemoteDataSource {
@@ -13,10 +13,10 @@ class VehiclePropertiesRemoteDataSourceImpl implements VehiclePropertiesRemoteDa
   VehiclePropertiesRemoteDataSourceImpl({this.dio});
 
   @override
-  Future<ResultsModel> getVehicleTypes() async {
+  Future<VehicleTypeListResponse> getVehicleTypes() async {
     try {
       final response = await dio.get('/napi/photos/Q14J2k8VE3U/related');
-      return ResultsModel.fromJson(response.data);
+      return VehicleTypeListResponse.fromJson(response.data);
     } catch (error) {
         throw ServerException();
     }

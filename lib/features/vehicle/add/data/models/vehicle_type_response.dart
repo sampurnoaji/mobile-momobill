@@ -1,12 +1,12 @@
 import 'package:momobill/features/vehicle/add/domain/models/vehicle_type.dart';
 
-class VehicleTypeListResponse extends VehicleType {
+class VehicleTypeListResponse extends VehicleType{
   final List<VehicleTypeResponse> vehicleTypes;
 
   VehicleTypeListResponse({this.vehicleTypes});
 
   factory VehicleTypeListResponse.fromJson(Map<String, dynamic> json) {
-    var list = json["results"] as List;
+    var list = json['results'] as List;
     List<VehicleTypeResponse> vehicleTypes =
         list.map((e) => VehicleTypeResponse.fromJson(e)).toList();
     return VehicleTypeListResponse(vehicleTypes: vehicleTypes);
@@ -14,17 +14,17 @@ class VehicleTypeListResponse extends VehicleType {
 }
 
 class VehicleTypeResponse {
-  final int id;
+  final String id;
   final String name;
 
   VehicleTypeResponse({this.id, this.name});
 
   factory VehicleTypeResponse.fromJson(Map<String, dynamic> json) {
-    return VehicleTypeResponse(id: json['jenisId'], name: json['nama']);
+    return VehicleTypeResponse(id: json['id'], name: json['description']);
   }
 }
 
-extension VehicleTypeExtension on VehicleTypeListResponse {
+extension ResultsModelExtension on VehicleTypeListResponse {
   get toDomainModel {
     List<VehicleType> vehicleTypes = [];
     this.vehicleTypes.forEach((element) {
