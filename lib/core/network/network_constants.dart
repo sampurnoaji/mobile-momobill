@@ -1,0 +1,1 @@
+const BASE_URL = 'http://io-technology.id/';
