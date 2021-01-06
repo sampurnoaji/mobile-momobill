@@ -31,17 +31,17 @@ class VehicleBrandChanged extends AddVehicleEvent {
   List<Object> get props => [brand];
 }
 
-class VehicleManufactureChanged extends AddVehicleEvent {
-  final String manufacture;
+class VehicleModelChanged extends AddVehicleEvent {
+  final String model;
 
-  VehicleManufactureChanged(this.manufacture);
+  VehicleModelChanged(this.model);
 
   @override
-  List<Object> get props => [manufacture];
+  List<Object> get props => [model];
 }
 
 class AddVehicle extends AddVehicleEvent {
-  final String type, brand, manufacture;
+  final String type, brand, model;
 
-  AddVehicle(this.type, this.brand, this.manufacture);
+  AddVehicle(this.type, this.brand, this.model);
 }

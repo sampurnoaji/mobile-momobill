@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:momobill/core/presentation/util/alert.dart';
 import 'package:momobill/features/vehicle/add/domain/models/vehicle_brand.dart';
+import 'package:momobill/features/vehicle/add/domain/models/vehicle_model.dart';
 import 'package:momobill/features/vehicle/add/domain/models/vehicle_type.dart';
 import 'package:momobill/features/vehicle/add/presentation/bloc/add_vehicle_bloc.dart';
 
@@ -23,10 +24,10 @@ class FormInput extends StatefulWidget {
 class _FormInputState extends State<FormInput> {
   VehicleType _selectedType;
   VehicleBrand _selectedBrand;
-  String _selectedManufacture;
-  List _myFriends = ['Yonji', 'Sanji', 'Niji'];
+  VehicleModel _selectedModel;
   List<VehicleType> _vehicleTypes = List();
   List<VehicleBrand> _vehicleBrands = List();
+  List<VehicleModel> _vehicleModels = List();
 
   @override
   void initState() {
@@ -61,6 +62,12 @@ class _FormInputState extends State<FormInput> {
               });
             } else if (state is GetVehicleBrandsFailure) {
               errorSnackBar(context, 'Gagal memuat merk kendaraan');
+            } else if (state is GetVehicleModelsSuccess) {
+              setState(() {
+                _vehicleModels = state.vehicleModels;
+              });
+            } else if (state is GetVehicleModelsFailure) {
+              errorSnackBar(context, 'Gagal memuat model kendaraan');
             }
           },
           child: SingleChildScrollView(
@@ -109,6 +116,7 @@ class _FormInputState extends State<FormInput> {
                       setState(() {
                         _selectedBrand = value;
                       });
+                      bloc.add(GetVehicleModels());
                     },
                   ),
                   SizedBox(height: 16),
@@ -116,17 +124,19 @@ class _FormInputState extends State<FormInput> {
                     decoration: InputDecoration(
                         hintText: 'Pilih model kendaraan',
                         labelText:
-                        _selectedBrand != null ? 'Model kendaraan' : null),
+                        _selectedModel != null ? 'Model kendaraan' : null),
                     isExpanded: true,
-                    items: _myFriends.map((value) {
+                    items: _vehicleModels.map((value) {
                       return DropdownMenuItem(
-                        child: Text(value),
+                        child: value.name != null
+                            ? Text(value.name)
+                            : Text("null"),
                         value: value,
                       );
                     }).toList(),
                     onChanged: (value) {
                       setState(() {
-                        _selectedManufacture = value;
+                        _selectedModel = value;
                       });
                     },
                   ),
@@ -145,7 +155,7 @@ class _FormInputState extends State<FormInput> {
                           textTheme: ButtonTextTheme.primary,
                           onPressed: () {
                             bloc.add(AddVehicle(_selectedType.name,
-                                _selectedBrand.name, _selectedManufacture));
+                                _selectedBrand.name, _selectedModel.name));
                           },
                         ),
                       );
