@@ -16,6 +16,17 @@ class GetVehicleTypesSuccess extends AddVehicleState {
 
 class GetVehicleTypesFailure extends AddVehicleState {}
 
+class GetVehicleBrandsSuccess extends AddVehicleState {
+  final List<VehicleBrand> vehicleBrands;
+
+  GetVehicleBrandsSuccess({this.vehicleBrands});
+
+  @override
+  List<Object> get props => [vehicleBrands];
+}
+
+class GetVehicleBrandsFailure extends AddVehicleState {}
+
 class AddVehicleInitial extends AddVehicleState {}
 
 class AddVehicleLoading extends AddVehicleState {}

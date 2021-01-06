@@ -14,13 +14,13 @@ class VehicleTypeListResponse extends VehicleType{
 }
 
 class VehicleTypeResponse {
-  final String id;
+  final int id;
   final String name;
 
   VehicleTypeResponse({this.id, this.name});
 
   factory VehicleTypeResponse.fromJson(Map<String, dynamic> json) {
-    return VehicleTypeResponse(id: json['id'], name: json['description']);
+    return VehicleTypeResponse(id: json['width'], name: json['description']);
   }
 }
 
