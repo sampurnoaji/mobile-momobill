@@ -10,33 +10,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-          onPressed: () {
-            print('Menu button');
-          },
-        ),
         title: Text('MoMoBill'),
         actions: [
           IconButton(
               icon: Icon(
-                Icons.search,
-                semanticLabel: 'search',
+                Icons.account_circle_sharp,
+                semanticLabel: 'account',
               ),
               onPressed: () {
-                print('Search button');
+                Navigator.pushNamed(context, ROUTE_ACCOUNT);
               }),
-          IconButton(
-              icon: Icon(
-                Icons.tune,
-                semanticLabel: 'filter',
-              ),
-              onPressed: () {
-                print('Filter button');
-              })
         ],
       ),
       resizeToAvoidBottomInset: false,

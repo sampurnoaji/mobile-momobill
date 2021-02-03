@@ -12,6 +12,10 @@ abstract class Failure extends Equatable {
 
 class ServerFailure extends Failure {}
 
+class ClientFailure extends Failure {}
+
 class CacheFailure extends Failure {}
 
 class ConnectionFailure extends Failure {}
+
+class UnknownFailure extends Failure {}

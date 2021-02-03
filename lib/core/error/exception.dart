@@ -1,3 +1,9 @@
-class ServerException implements Exception {}
+class ServerErrorException implements Exception {}
 
-class CacheException implements Exception {}
+class ClientErrorException implements Exception {}
+
+class CacheErrorException implements Exception {}
+
+class ConnectionException implements Exception {}
+
+class UnknownException implements Exception {}

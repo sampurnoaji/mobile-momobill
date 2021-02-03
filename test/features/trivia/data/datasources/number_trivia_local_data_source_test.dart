@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -45,7 +44,7 @@ void main() {
         // act
         final call = dataSource.getLastNumberTrivia;
         // assert
-        expect(() => call(), throwsA(TypeMatcher<CacheException>()));
+        expect(() => call(), throwsA(TypeMatcher<CacheErrorException>()));
       },
     );
   });

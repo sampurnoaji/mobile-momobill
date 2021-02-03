@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
@@ -72,7 +71,7 @@ void main() {
         // act
         final call = dataSource.getConcreteNumberTrivia;
         // assert
-        expect(() => call(tNumber), throwsA(isA<ServerException>()));
+        expect(() => call(tNumber), throwsA(isA<ServerErrorException>()));
       },
     );
   });
@@ -116,7 +115,7 @@ void main() {
         // act
         final call = dataSource.getRandomNumberTrivia;
         // assert
-        expect(() => call(), throwsA(isA<ServerException>()));
+        expect(() => call(), throwsA(isA<ServerErrorException>()));
       },
     );
   });

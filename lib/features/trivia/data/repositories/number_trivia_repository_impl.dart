@@ -36,14 +36,14 @@ class NumberTriviaRepositoryImpl implements NumberTriviaRepository {
         final remoteTrivia = await getConcreteOrRandomNumber();
         localDataSource.cacheNumberTrivia(remoteTrivia);
         return Right(remoteTrivia);
-      } on ServerException {
+      } on ServerErrorException {
         return Left(ServerFailure());
       }
     } else {
       try {
         final localTrivia = await localDataSource.getLastNumberTrivia();
         return Right(localTrivia);
-      } on CacheException {
+      } on CacheErrorException {
         return Left(CacheFailure());
       }
     }

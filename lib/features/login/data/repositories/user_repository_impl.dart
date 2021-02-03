@@ -22,8 +22,12 @@ class UserRepositoryImpl extends UserRepository {
       try {
         final loginResponse = await loginRemoteDataSource.login(LoginRequest(username: username, password: password));
         return Right(loginResponse.toDomainModel);
-      } on ServerException {
+      } on ServerErrorException {
         return Left(ServerFailure());
+      } on ClientErrorException {
+        return Left(ClientFailure());
+      } on UnknownException {
+        return Left(UnknownFailure());
       }
     } else {
       return Left(ConnectionFailure());

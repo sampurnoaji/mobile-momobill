@@ -101,7 +101,7 @@ void main() {
             () async {
           // arrange
           when(mockRemoteDataSource.getConcreteNumberTrivia(any))
-              .thenThrow(ServerException());
+              .thenThrow(ServerErrorException());
           // act
           final result = await repository.getConcreteNumberTrivia(tNumber);
           // assert
@@ -133,7 +133,7 @@ void main() {
             () async {
           // arrange
           when(mockLocalDataSource.getLastNumberTrivia())
-              .thenThrow(CacheException());
+              .thenThrow(CacheErrorException());
           // act
           final result = await repository.getConcreteNumberTrivia(tNumber);
           // assert

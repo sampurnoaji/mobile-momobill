@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -17,16 +18,25 @@ class LoginRemoteDataSourceImpl extends LoginRemoteDataSource {
 
   @override
   Future<LoginResponse> login(LoginRequest request) async {
-    final response = await client.post(
-      'replace with login API',
-      headers: {"content-type": "application/json"},
-      body: json.encode(request.toJson()),
-    );
+    try {
+      final response = await client.post(
+        'replace with login API',
+        headers: {"content-type": "application/json"},
+        body: json.encode(request.toJson()),
+      );
 
-    if (response.statusCode == 200) {
-      return LoginResponse.fromJson(json.decode(response.body));
-    } else {
-      throw ServerException();
+      final statusCode = response.statusCode;
+      if (statusCode >= 200 && statusCode < 299) {
+        return LoginResponse.fromJson(json.decode(response.body));
+      } else if (statusCode >= 400 && statusCode < 500) {
+        throw ClientErrorException();
+      } else if (statusCode >= 500 && statusCode < 600) {
+        throw ServerErrorException();
+      } else {
+        throw UnknownException();
+      }
+    } on SocketException {
+      throw ConnectionException();
     }
   }
 }

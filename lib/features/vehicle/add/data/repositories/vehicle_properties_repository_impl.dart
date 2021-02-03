@@ -23,7 +23,7 @@ class VehiclePropertiesRepositoryImpl implements VehiclePropertiesRepository {
       try {
         final response = await remoteDataSource.getVehicleTypes();
         return Right(response.toDomainModel);
-      } on ServerException {
+      } on ServerErrorException {
         return Left(ServerFailure());
       }
     } else {
@@ -37,7 +37,7 @@ class VehiclePropertiesRepositoryImpl implements VehiclePropertiesRepository {
       try {
         final response = await remoteDataSource.getVehicleBrands();
         return Right(response.toDomainModel);
-      } on ServerException {
+      } on ServerErrorException {
         return Left(ServerFailure());
       }
     } else {
@@ -51,7 +51,7 @@ class VehiclePropertiesRepositoryImpl implements VehiclePropertiesRepository {
       try {
         final response = await remoteDataSource.getVehicleModels();
         return Right(response.toDomainModel);
-      } on ServerException {
+      } on ServerErrorException {
         return Left(ServerFailure());
       }
     } else {

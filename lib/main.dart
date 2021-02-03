@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:momobill/core/presentation/util/navigator.dart';
+import 'package:momobill/features/account/presentation/pages/account_page.dart';
 import 'package:momobill/features/authentication/bloc/authentication_bloc.dart';
 import 'package:momobill/features/login/presentation/pages/login_page.dart';
 import 'package:momobill/features/trivia/presentation/pages/number_trivia_page.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         ROUTE_HOME: (_) => HomePage(),
         ROUTE_TRIVIA: (context) => NumberTriviaPage(),
         ROUTE_ADD_VEHICLE: (_) => AddVehiclePage(),
+        ROUTE_ACCOUNT: (_) => AccountPage()
       },
       theme: _kTheme,
       home: BlocProvider(
