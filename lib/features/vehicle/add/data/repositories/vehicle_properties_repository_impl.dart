@@ -19,15 +19,11 @@ class VehiclePropertiesRepositoryImpl implements VehiclePropertiesRepository {
 
   @override
   Future<Either<Failure, List<VehicleType>>> getVehicleTypes() async {
-    if (await networkInfo.isConnected) {
-      try {
-        final response = await remoteDataSource.getVehicleTypes();
-        return Right(response.toDomainModel);
-      } on ServerErrorException {
-        return Left(ServerFailure());
-      }
-    } else {
-      return Left(ConnectionFailure());
+    try {
+      final response = await remoteDataSource.getVehicleTypes();
+      return Right(response.toDomainModel);
+    } catch (e) {
+      return Left(e);
     }
   }
 

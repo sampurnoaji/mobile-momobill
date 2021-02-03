@@ -8,32 +8,75 @@ class ApiBaseHelper {
   final String _baseUrl = 'https://unsplash.com';
 
   Future<dynamic> get(String url) async {
-    print('Api Get, url $url');
+    print('GET START --> ${_baseUrl + url}');
     var responseJson;
     try {
       final response = await http.get(_baseUrl + url);
       responseJson = _returnResponse(response);
     } on SocketException {
-      print('No net');
+      print('No internet connection');
       throw FetchDataException('No Internet connection');
     }
-    print('api get recieved!');
+    print('GET END --> ${_baseUrl + url}');
     return responseJson;
   }
 
-  dynamic _returnResponse(http.Response response) {
-    final statusCode = response.statusCode;
-    if (statusCode == 200) {
-      var responseJson = json.decode(response.body.toString());
-      print(responseJson);
-      return responseJson;
-    } else if (statusCode >= 400 && statusCode < 500) {
-      throw ClientException(response.body.toString());
-    } else if (statusCode >= 500 && statusCode < 600) {
-      throw ServerException(response.body.toString());
-    } else {
-      throw FetchDataException(
-          'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
+  Future<dynamic> post(String url, dynamic body) async {
+    print('Api Post, url $url');
+    var responseJson;
+    try {
+      final response = await http.post(_baseUrl + url, body: body);
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      print('No net');
+      throw FetchDataException('No Internet connection');
     }
+    print('api post.');
+    return responseJson;
+  }
+
+  Future<dynamic> put(String url, dynamic body) async {
+    print('Api Put, url $url');
+    var responseJson;
+    try {
+      final response = await http.put(_baseUrl + url, body: body);
+      responseJson = _returnResponse(response);
+    } on SocketException {
+      print('No net');
+      throw FetchDataException('No Internet connection');
+    }
+    print('api put.');
+    print(responseJson.toString());
+    return responseJson;
+  }
+
+  Future<dynamic> delete(String url) async {
+    print('Api delete, url $url');
+    var apiResponse;
+    try {
+      final response = await http.delete(_baseUrl + url);
+      apiResponse = _returnResponse(response);
+    } on SocketException {
+      print('No net');
+      throw FetchDataException('No Internet connection');
+    }
+    print('api delete.');
+    return apiResponse;
+  }
+}
+
+dynamic _returnResponse(http.Response response) {
+  final statusCode = response.statusCode;
+  print('Response Status code --> ${response.statusCode}');
+  print('Response Body --> ${response.body}');
+  if (statusCode == 200) {
+    var responseJson = json.decode(response.body.toString());
+    return responseJson;
+  } else if (statusCode >= 400 && statusCode < 500) {
+    throw ClientException(response.body.toString());
+  } else if (statusCode >= 500 && statusCode < 600) {
+    throw ServerException(response.body.toString());
+  } else {
+    throw FetchDataException('Error occured while Communication with Server');
   }
 }

@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:momobill/core/error/exception.dart';
+import 'package:momobill/core/network/api/api_base_helper.dart';
 import 'package:momobill/features/vehicle/add/data/models/vehicle_brand_response.dart';
 import 'package:momobill/features/vehicle/add/data/models/vehicle_model_response.dart';
 import 'package:momobill/features/vehicle/add/data/models/vehicle_type_response.dart';
@@ -16,14 +17,12 @@ class VehiclePropertiesRemoteDataSourceImpl implements VehiclePropertiesRemoteDa
 
   VehiclePropertiesRemoteDataSourceImpl({this.dio});
 
+  ApiBaseHelper _helper = ApiBaseHelper();
+
   @override
   Future<VehicleTypeListResponse> getVehicleTypes() async {
-    try {
-      final response = await dio.get('/napi/photos/Q14J2k8VE3U/related');
-      return VehicleTypeListResponse.fromJson(response.data);
-    } catch (error) {
-        throw ServerErrorException();
-    }
+    final response = await _helper.get('/napi/photos/Q14J2k8VE3U/related');
+    return VehicleTypeListResponse.fromJson(response);
   }
 
   @override
