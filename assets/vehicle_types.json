@@ -1,0 +1,17 @@
+{
+  "result": [
+    {
+      "jenisId": 1,
+      "nama": "Motor"
+    },
+    {
+      "jenisId": 2,
+      "nama": "Mobil"
+    },
+    {
+      "jenisId": 3,
+      "nama": "Pesawat"
+    }
+  ],
+  "resultStatus": "OK"
+}

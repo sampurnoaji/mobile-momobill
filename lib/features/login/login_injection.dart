@@ -13,6 +13,6 @@ class LoginInjection {
 
     // Data sources
     sl.registerLazySingleton<LoginRemoteDataSource>(
-        () => LoginRemoteDataSourceImpl(client: sl()));
+        () => LoginRemoteDataSourceImpl(helper: sl()));
   }
 }

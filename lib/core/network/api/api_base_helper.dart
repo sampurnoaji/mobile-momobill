@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:momobill/core/error/app_exception.dart';
 
@@ -22,46 +23,56 @@ class ApiBaseHelper {
   }
 
   Future<dynamic> post(String url, dynamic body) async {
-    print('Api Post, url $url');
+    print('POST START --> ${_baseUrl + url}');
+    print('Request Body: $body');
     var responseJson;
     try {
       final response = await http.post(_baseUrl + url, body: body);
       responseJson = _returnResponse(response);
     } on SocketException {
-      print('No net');
+      print('No internet connection');
       throw FetchDataException('No Internet connection');
     }
-    print('api post.');
+    print('POST END --> ${_baseUrl + url}');
     return responseJson;
   }
 
   Future<dynamic> put(String url, dynamic body) async {
-    print('Api Put, url $url');
+    print('PUT START --> ${_baseUrl + url}');
     var responseJson;
     try {
       final response = await http.put(_baseUrl + url, body: body);
       responseJson = _returnResponse(response);
     } on SocketException {
-      print('No net');
+      print('No internet connection');
       throw FetchDataException('No Internet connection');
     }
-    print('api put.');
-    print(responseJson.toString());
+    print('PUT END --> ${_baseUrl + url}');
     return responseJson;
   }
 
   Future<dynamic> delete(String url) async {
-    print('Api delete, url $url');
+    print('DELETE START --> ${_baseUrl + url}');
     var apiResponse;
     try {
       final response = await http.delete(_baseUrl + url);
       apiResponse = _returnResponse(response);
     } on SocketException {
-      print('No net');
+      print('No internet connection');
       throw FetchDataException('No Internet connection');
     }
-    print('api delete.');
+    print('DELETE END --> ${_baseUrl + url}');
     return apiResponse;
+  }
+
+  Future<dynamic> mockGet(String url, String jsonFile) async {
+    var data = await rootBundle.loadString(jsonFile);
+    return json.decode(data);
+  }
+
+  Future<dynamic> mockPost(String url, dynamic request, String jsonFile) async {
+    var data = await rootBundle.loadString(jsonFile);
+    return json.decode(data);
   }
 }
 

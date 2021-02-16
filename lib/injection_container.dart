@@ -1,6 +1,7 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
+import 'package:momobill/core/network/api/api_base_helper.dart';
 import 'package:momobill/core/network/dio.dart';
 import 'package:momobill/core/network/network_info.dart';
 import 'package:momobill/core/presentation/util/input_converter.dart';
@@ -23,6 +24,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => Client());
   sl.registerLazySingleton(() => DataConnectionChecker());
   sl.registerLazySingleton(() => getDio());
+  sl.registerLazySingleton(() => ApiBaseHelper());
 
   // Features
   AuthenticationInjection.setupServiceLocator(sl);
